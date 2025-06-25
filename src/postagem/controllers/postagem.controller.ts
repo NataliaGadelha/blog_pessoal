@@ -13,43 +13,43 @@ import {
   Put,
 } from '@nestjs/common';
 
-@Controller('/postagens')
+@Controller('/postagens') // Define a rota base do controller como /postagens
 export class PostagemController {
-  constructor(private readonly postagemService: PostagemService) {}
+  constructor(private readonly postagemService: PostagemService) {} // Injeta o PostagemService
 
-  @Get()
-  @HttpCode(HttpStatus.OK)
+  @Get() // Rota GET /postagens
+  @HttpCode(HttpStatus.OK) // Retorna status 200
   findAll(): Promise<Postagem[]> {
-    return this.postagemService.findAll();
+    return this.postagemService.findAll(); // Chama o método do service que busca todas as postagens
   }
 
-  @Get('/:id')
-  @HttpCode(HttpStatus.OK)
+  @Get('/:id') // Rota GET /postagens/:id
+  @HttpCode(HttpStatus.OK) // Retorna status 200
   findById(@Param('id', ParseIntPipe) id: number): Promise<Postagem> {
-    return this.postagemService.findById(id);
+    return this.postagemService.findById(id); // Busca uma postagem pelo ID (convertido para número)
   }
 
-  @Get('/titulo/:titulo')
-  @HttpCode(HttpStatus.OK)
+  @Get('/titulo/:titulo') // Rota GET /postagens/titulo/:titulo
+  @HttpCode(HttpStatus.OK) // Retorna status 200
   findByAllTitulo(@Param('titulo') titulo: string): Promise<Postagem[]> {
-    return this.postagemService.findAllByTitulo(titulo);
+    return this.postagemService.findAllByTitulo(titulo); // Busca postagens que contenham o título informado
   }
 
-  @Post()
-  @HttpCode(HttpStatus.CREATED)
+  @Post() // Rota POST /postagens
+  @HttpCode(HttpStatus.CREATED) // Retorna status 201 (Criado)
   create(@Body() postagem: Postagem): Promise<Postagem> {
-    return this.postagemService.create(postagem);
+    return this.postagemService.create(postagem); // Cria uma nova postagem com os dados do corpo da requisição
   }
 
-  @Put()
-  @HttpCode(HttpStatus.OK)
+  @Put() // Rota PUT /postagens
+  @HttpCode(HttpStatus.OK) // Retorna status 200
   update(@Body() postagem: Postagem): Promise<Postagem> {
-    return this.postagemService.update(postagem);
+    return this.postagemService.update(postagem); // Atualiza uma postagem com os dados do corpo
   }
 
-  @Delete('/:id')
-  @HttpCode(HttpStatus.NO_CONTENT)
+  @Delete('/:id') // Rota DELETE /postagens/:id
+  @HttpCode(HttpStatus.NO_CONTENT) // Retorna status 204 (sem conteúdo)
   delete(@Param('id', ParseIntPipe) id: number) {
-    return this.postagemService.delete(id);
+    return this.postagemService.delete(id); // Exclui uma postagem pelo ID
   }
 }
