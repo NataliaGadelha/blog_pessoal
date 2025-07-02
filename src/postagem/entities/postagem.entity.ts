@@ -7,6 +7,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { Tema } from '../../tema/entities/tema.entity';
+import { Usuario } from '../../usuario/entities/usuario.entity';
 
 @Entity({ name: 'tb_postagens' }) // Define o nome da tabela no banco como "tb_postagens"
 export class Postagem {
@@ -29,4 +30,10 @@ export class Postagem {
     onDelete: 'CASCADE', // Se o tema for excluído, todas as postagens relacionadas também serão excluídas
   })
   tema: Tema; // Referência à entidade Tema
+
+  @ManyToOne(() => Usuario, (usuario) => usuario.postagem, {
+    // Relacionamento N:1 com Tema
+    onDelete: 'CASCADE', // Se o usuário for excluído, todas as postagens relacionadas também serão excluídas
+  })
+  usuario: Usuario; // Referência à entidade Usuario
 }

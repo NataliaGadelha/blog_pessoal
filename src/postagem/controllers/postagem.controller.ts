@@ -1,3 +1,4 @@
+import { JwtAuthGuard } from '../../auth/guard/jwt-auth.guard';
 import { PostagemService } from '../services/postagem.service';
 import { Postagem } from './../entities/postagem.entity';
 import {
@@ -11,8 +12,10 @@ import {
   ParseIntPipe,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 
+@UseGuards(JwtAuthGuard)
 @Controller('/postagens') // Define a rota base do controller como /postagens
 export class PostagemController {
   constructor(private readonly postagemService: PostagemService) {} // Injeta o PostagemService

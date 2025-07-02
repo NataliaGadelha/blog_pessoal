@@ -17,6 +17,7 @@ export class PostagemService {
     return await this.postagemRepository.find({
       relations: {
         tema: true, // Inclui o tema relacionado ao retornar as postagens
+        usuario: true, // Inclui os dados do usuário vinculado
       },
     });
   }
@@ -28,6 +29,7 @@ export class PostagemService {
       },
       relations: {
         tema: true, // Inclui o tema vinculado
+        usuario: true, // Inclui os dados do usuário vinculado
       },
     });
 
@@ -45,6 +47,7 @@ export class PostagemService {
       },
       relations: {
         tema: true, // Inclui os dados do tema vinculado
+        usuario: true, // Inclui os dados do usuário vinculado
       },
     });
   }

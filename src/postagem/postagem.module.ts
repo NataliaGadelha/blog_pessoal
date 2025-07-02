@@ -12,6 +12,6 @@ import { TemaModule } from '../tema/tema.module';
   ],
   providers: [PostagemService], // Declara o PostagemService como provedor injetável
   controllers: [PostagemController], // Registra o controller responsável pelas rotas HTTP
-  exports: [],
+  exports: [TypeOrmModule],
 })
 export class PostagemModule {} // Declaração do módulo de postagens
