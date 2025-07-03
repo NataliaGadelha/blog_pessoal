@@ -24,6 +24,7 @@ export class AuthService {
     );
 
     if (buscaUsuario && matchPassword) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { senha, ...resposta } = buscaUsuario;
       return resposta;
     }
@@ -38,16 +39,12 @@ export class AuthService {
       usuarioLogin.usuario,
     );
 
-    if (!buscaUsuario) {
-      throw new HttpException('Usuário não encontrado!', HttpStatus.NOT_FOUND);
-    }
-
     return {
-      id: buscaUsuario.id,
-      nome: buscaUsuario.nome,
+      id: buscaUsuario?.id,
+      nome: buscaUsuario?.nome,
       usuario: usuarioLogin.usuario,
       senha: '',
-      foto: buscaUsuario.foto,
+      foto: buscaUsuario?.foto,
       token: `Bearer ${this.jwtService.sign(payload)}`,
     };
   }
