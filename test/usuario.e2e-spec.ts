@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import * as request from 'supertest';
@@ -9,6 +11,7 @@ describe('Testes dos Módulos Usuario e Auth (e2e)', () => {
   let token: any;
   let usuarioId: any;
   let app: INestApplication<App>;
+  let temaId: any;
 
   beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
@@ -134,5 +137,30 @@ describe('Testes dos Módulos Usuario e Auth (e2e)', () => {
       .set('Authorization', `${token}`)
       .send({})
       .expect(404);
+  });
+
+  it('10 - Deve conseguir criar um novo tema', async () => {
+    const resposta = await request(app.getHttpServer())
+      .post('/temas')
+      .set('Authorization', `${token}`)
+      .send({
+        descricao: 'novo tema',
+      })
+      .expect(201);
+
+    temaId = resposta.body.id;
+  });
+
+  it('11 - Deve conseguir criar uma nova postagem', async () => {
+    await request(app.getHttpServer())
+      .post('/postagens')
+      .set('Authorization', `${token}`)
+      .send({
+        titulo: 'título da postagem',
+        texto: 'texto da postagem',
+        tema: temaId,
+        usuario: usuarioId,
+      })
+      .expect(201);
   });
 });
