@@ -127,4 +127,12 @@ describe('Testes dos Módulos Usuario e Auth (e2e)', () => {
       .send({})
       .expect(200);
   });
+
+  it('09 - Deve Apresentar Erro ao Listar o Usuário por um Id que não existe', async () => {
+    return request(app.getHttpServer())
+      .get('/usuarios/2')
+      .set('Authorization', `${token}`)
+      .send({})
+      .expect(404);
+  });
 });
