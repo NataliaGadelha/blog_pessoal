@@ -13,7 +13,7 @@ async function bootstrap() {
     )
     .setContact(
       'Natália Gadelha',
-      'http://www.generationbrasil.online',
+      'https://www.linkedin.com/in/natalia-gadelha',
       'natalia_agadelha@outlook.com',
     )
     .setVersion('1.0')
